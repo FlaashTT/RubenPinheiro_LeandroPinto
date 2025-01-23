@@ -1,6 +1,5 @@
 <html>
 
-
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -48,7 +47,6 @@
     input[type="checkbox"] {
         display: inline;
         margin-right: 5px;
-        /* Espaçamento entre a checkbox e o texto */
     }
 
     button {
@@ -82,17 +80,15 @@
 
 <?php
 
-
-
 session_start();
 include("../basedados/basedados.h");
 require("../paginas/validar.php");
 
+
 validar_acesso([3, 2, 1]);
 
-
-
 $user = $_SESSION['user'];
+
 if ($user['TipoUser'] == 1) {
     echo '
     <div style="text-align: left; margin-bottom: 5px;">
@@ -107,23 +103,20 @@ if ($user['TipoUser'] == 1) {
     ';
 }
 
-
-
-
-if (isset($_GET['gestaoCarteira']) || isset($_POST['adicionarSaldo']) || isset($_POST['levantarSaldo'])) {
+if (isset($_GET['gestaoCarteira']) || isset($_GET['adicionarSaldo']) || isset($_GET['levantarSaldo'])) {
     if (isset($_GET['gestaoCarteira'])) {
         $AdicionarEmail = $_GET['gestaoCarteira'];
-    } elseif (isset($_POST['adicionarSaldo'])) {
-        $AdicionarEmail = $_POST['adicionarSaldo'];
-    } elseif (isset($_POST['levantarSaldo'])) {
-        $AdicionarEmail = $_POST['levantarSaldo'];
+    } elseif (isset($_GET['adicionarSaldo'])) {
+        $AdicionarEmail = $_GET['adicionarSaldo'];
+    } elseif (isset($_GET['levantarSaldo'])) {
+        $AdicionarEmail = $_GET['levantarSaldo'];
     }
 
     // Mostra as opções de carteira
     echo "
     <h2>Gestão de carteira</h2>
     <p>Selecione a opção:</p>
-    <form method='POST'>
+    <form>
         <div class='botoes-inline'>
             <button class='opcao-btn' type='submit' name='adicionarSaldo' value='$AdicionarEmail'>Adicionar Saldo</button>
             <button class='opcao-btn' type='submit' name='levantarSaldo' value='$AdicionarEmail'>Levantar Saldo</button>
@@ -132,10 +125,9 @@ if (isset($_GET['gestaoCarteira']) || isset($_POST['adicionarSaldo']) || isset($
     ";
 }
 
-
 // Mostra o formulário para adicionar saldo quando clicado
-if (isset($_POST['adicionarSaldo'])) {
-    $AdicionarEmail = $_POST['adicionarSaldo'];
+if (isset($_GET['adicionarSaldo'])) {
+    $AdicionarEmail = $_GET['adicionarSaldo'];
 
     echo "
     <h2>Adicionar Saldo</h2>
@@ -153,7 +145,7 @@ if (isset($_POST['adicionarSaldo'])) {
     ";
 }
 
-if (isset($_POST['confirmarAddSaldo'])) {
+if (isset($_GET['confirmarAddSaldo'])) {
     $user = $_SESSION['user'];
     $AdicionarEmail = $user['Email'];
 
@@ -249,8 +241,10 @@ if (isset($_POST['confirmarAddSaldo'])) {
     }
 }
 
-if (isset($_POST['levantarSaldo'])) {
-    $AdicionarEmail = $_POST['levantarSaldo'];
+
+
+if (isset($_GET['levantarSaldo'])) {
+    $AdicionarEmail = $_GET['levantarSaldo'];
 
     echo "
     <h3>Levantar Dinheiro</h3>
@@ -263,7 +257,7 @@ if (isset($_POST['levantarSaldo'])) {
 }
 
 
-if (isset($_POST['confirmarLevantar'])) {
+if (isset($_GET['confirmarLevantar'])) {
     $user = $_SESSION['user'];
     $AdicionarEmail = $user['Email'];
 
@@ -309,4 +303,6 @@ if (isset($_POST['confirmarLevantar'])) {
     // Redireciona para a página principal de gestão de carteira
     header("Refresh: 3; url=?gestaoCarteira=$AdicionarEmail");
 }
+
 ?>
+

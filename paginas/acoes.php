@@ -85,8 +85,8 @@ session_start();
 include("../basedados/basedados.h");
 require("../paginas/validar.php");
 
-validar_acesso([3, 2, 1]);
 
+validar_acesso([3, 2, 1]);
 $user = $_SESSION['user'];
 if ($user['TipoUser'] == 1) {
     echo '
@@ -102,21 +102,10 @@ if ($user['TipoUser'] == 1) {
     ';
 }
 
-if (
-    !isset($_POST['editarConta']) &&
-    !isset($_POST['alterarDados']) && 
-    !isset($_POST['alterarTipoConta'])&& 
-    !isset($_POST['EliminarConta']) &&
-    !isset($_POST['gestaoCarteira']) && 
-    !isset($_POST['adicionarSaldo']) && 
-    !isset($_POST['levantarSaldo'])
-) {
-    header("Refresh: 0.1; url=../paginas/inicio.php");
-}
 
 
-if (isset($_POST['editarConta'])) {
-    $user_email = $_POST['editarConta'];
+if (isset($_GET['editarConta'])) {
+    $user_email = $_GET['editarConta'];
     echo "<h1>Alterar Dados</h1>";
     echo "<p>Email do utilizador: " . $user_email . "</p>";
 
@@ -147,7 +136,7 @@ if (isset($_POST['editarConta'])) {
                             Estado de autenticação do utilizador: " . $user['Autenticacao'] . " 
                                 <select id='alterarTipo' name='alterarTipo'>
                                     <option value='' selected disabled>Selecione uma opção</option>
-                                    <option value='Aceite'>Aceitar utilizador</option>
+                                    <option value='Aceitar'>Aceitar utilizador</option>
                                     <option value='Pendente'>Colocar Pendente</option>
                                     <option value='Rejeitar'>Rejeitar utilizador</option>
                                 </select>
@@ -227,13 +216,13 @@ if (isset($_POST['alterarDados'])) {
 }
 
 
-if (isset($_POST['gestaoCarteira']) || isset($_POST['adicionarSaldo']) || isset($_POST['levantarSaldo'])) {
-    if (isset($_POST['gestaoCarteira'])) {
-        $AdicionarEmail = $_POST['gestaoCarteira'];
-    } elseif (isset($_POST['adicionarSaldo'])) {
-        $AdicionarEmail = $_POST['adicionarSaldo'];
-    } elseif (isset($_POST['levantarSaldo'])) {
-        $AdicionarEmail = $_POST['levantarSaldo'];
+if (isset($_GET['gestaoCarteira']) || isset($_GET['adicionarSaldo']) || isset($_GET['levantarSaldo'])) {
+    if (isset($_GET['gestaoCarteira'])) {
+        $AdicionarEmail = $_GET['gestaoCarteira'];
+    } elseif (isset($_GET['adicionarSaldo'])) {
+        $AdicionarEmail = $_GET['adicionarSaldo'];
+    } elseif (isset($_GET['levantarSaldo'])) {
+        $AdicionarEmail = $_GET['levantarSaldo'];
     }
 
     // Mostra as opções de carteira
@@ -250,8 +239,8 @@ if (isset($_POST['gestaoCarteira']) || isset($_POST['adicionarSaldo']) || isset(
 }
 
 // Mostra o formulário para adicionar saldo quando clicado
-if (isset($_POST['adicionarSaldo'])) {
-    $AdicionarEmail = $_POST['adicionarSaldo'];
+if (isset($_GET['adicionarSaldo'])) {
+    $AdicionarEmail = $_GET['adicionarSaldo'];
 
     echo "
     <h2>Adicionar Saldo</h2>
@@ -269,7 +258,7 @@ if (isset($_POST['adicionarSaldo'])) {
     ";
 }
 
-if (isset($_POST['confirmarAddSaldo'])) {
+if (isset($_GET['confirmarAddSaldo'])) {
     $user = $_SESSION['user'];
     $AdicionarEmail = $user['Email'];
 
@@ -367,8 +356,8 @@ if (isset($_POST['confirmarAddSaldo'])) {
 
 
 
-if (isset($_POST['levantarSaldo'])) {
-    $AdicionarEmail = $_POST['levantarSaldo'];
+if (isset($_GET['levantarSaldo'])) {
+    $AdicionarEmail = $_GET['levantarSaldo'];
 
     echo "
     <h3>Levantar Dinheiro</h3>
@@ -381,7 +370,7 @@ if (isset($_POST['levantarSaldo'])) {
 }
 
 
-if (isset($_POST['confirmarLevantar'])) {
+if (isset($_GET['confirmarLevantar'])) {
     $user = $_SESSION['user'];
     $AdicionarEmail = $user['Email'];
 
@@ -428,23 +417,23 @@ if (isset($_POST['confirmarLevantar'])) {
     header("Refresh: 3; url=?gestaoCarteira=$AdicionarEmail");
 }
 
-if (isset($_POST['alterarTipoConta'])) {
-    $AlterarEmail = $_POST['alterarTipoConta'];
+if (isset($_GET['alterarTipoConta'])) {
+    $AlterarEmail = $_GET['alterarTipoConta'];
     textoTrocaTipoUser($AlterarEmail);
 }
 
-if (isset($_POST['ConfirmarTrocaTipo'])) {
-    $AlterarEmail = $_POST['ConfirmarTrocaTipo'];
+if (isset($_GET['ConfirmarTrocaTipo'])) {
+    $AlterarEmail = $_GET['ConfirmarTrocaTipo'];
 
     // Verifica se a opção foi selecionada
-    if (!isset($_POST["alterarTipo"]) || empty($_POST["alterarTipo"])) {
+    if (!isset($_GET["alterarTipo"]) || empty($_GET["alterarTipo"])) {
         echo 'Tem de selecionar um tipo!';
         textoTrocaTipoUser($AlterarEmail);
         exit();
     }
 
     
-    $opcoes = $_POST["alterarTipo"];
+    $opcoes = $_GET["alterarTipo"];
 
     //atualizar o tipo de utilizador
     $sql = "UPDATE users SET tipoUser = '$opcoes' WHERE Email = '$AlterarEmail'";
@@ -465,8 +454,8 @@ if (isset($_POST['ConfirmarTrocaTipo'])) {
     }
 }
 
-if (isset($_POST['EliminarConta'])) {
-    $eliminarEmail = $_POST['EliminarConta'];
+if (isset($_GET['EliminarConta'])) {
+    $eliminarEmail = $_GET['EliminarConta'];
     echo '<h1>Eliminar Dados</h1>';
     echo "<p>Utilizador: " . $eliminarEmail . "</p>";
     echo '
@@ -483,29 +472,27 @@ if (isset($_POST['EliminarConta'])) {
     ';
 }
 
-if (isset($_POST['ConfirmarButton'])) {
-    $user_email = $_POST['ConfirmarButton'];
+if (isset($_GET['ConfirmarButton'])) {
+    $user_email = $_GET['ConfirmarButton'];
 
-    // Atualizar o estado do utilizador para "Eliminado"
-    $sqlUpdate = "UPDATE users SET Autenticacao = 'Eliminado' WHERE Email = '$user_email'";
+    $sql = "DELETE FROM users WHERE Email = '$user_email'";
 
-       
-        if (mysqli_query($conn, $sqlUpdate)) {
-            //para criar um alerta
-            $dataAtual = date('Y-m-d');
-            $user = $_SESSION['user'];
-            $tipoUser = $user['TipoUser'];
-            $sqlAlert = "INSERT INTO alertas (texto_alerta, data_emissao, id_remetentes, tipo) 
-            VALUES ('O administrador, com id" . $user['Id_User'] . ", eliminou um utilizador', '$dataAtual', " . $user['Id_User'] . ", 'Elimnar utilizador')";
 
-            if (mysqli_query($conn, $sqlAlert)) {
-                echo "<p>Utilizador eliminado com sucesso! </p>";
-                header("Refresh: 2; url=../paginas/gestao_utilizadores.php");
-            }
-        } else {
-            echo "Erro ao aceitar o usuário: " . mysqli_error($conn);
+    if (mysqli_query($conn, $sql)) {
+        //para criar um alerta
+        $dataAtual = date('Y-m-d');
+        $user = $_SESSION['user'];
+        $tipoUser = $user['TipoUser'];
+        $sqlAlert = "INSERT INTO alertas (texto_alerta, data_emissao, id_remetentes, tipo) 
+     VALUES ('O administrador, com id" . $user['Id_User'] . ", eliminou um utilizador', '$dataAtual', " . $user['Id_User'] . ", 'Elimnar utilizador')";
+
+        if (mysqli_query($conn, $sqlAlert)) {
+            echo "<p>Utilizador eliminado com sucesso! </p>";
+            header("Refresh: 2; url=../paginas/gestao_utilizadores.php");
         }
-    
+    } else {
+        echo "Erro ao aceitar o usuário: " . mysqli_error($conn);
+    }
 }
 
 header(" url=inicio.php?page=gerenciar-utilizadores");
