@@ -33,8 +33,8 @@ validar_acesso([3]); // Apenas admins (TipoUser = 3) têm acesso
             } else {
                 echo "Sem nenhum utilizador para verificar";
             }
-            if (isset($_GET['AceitarPedido'])) {
-                $user_email = $_GET['AceitarPedido'];
+            if (isset($_POST['AceitarPedido'])) {
+                $user_email = $_POST['AceitarPedido'];
 
                 // Atualiza o campo 'Autenticacao' para 'Aceite' na base de dados
                 $sql = "UPDATE users SET Autenticacao = 'Aceite' WHERE Email = '$user_email'";
@@ -47,8 +47,8 @@ validar_acesso([3]); // Apenas admins (TipoUser = 3) têm acesso
                 }
             }
 
-            if (isset($_GET['RejeitarPedido'])) {
-                $user_email = $_GET['RejeitarPedido'];
+            if (isset($_POST['RejeitarPedido'])) {
+                $user_email = $_POST['RejeitarPedido'];
 
                 // Atualiza o campo 'Autenticacao' para 'rejeitado' na base de dados
                 $sql = "UPDATE users SET Autenticacao = 'Rejeitado' WHERE Email = '$user_email'";
