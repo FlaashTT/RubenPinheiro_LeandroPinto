@@ -105,7 +105,7 @@ if (isset($_POST['reset']) && $_POST['reset'] == 'true') {
                     if ($result = mysqli_query($conn, $sql)) {
                         //para criar um alerta
                         $dataAtual = date('Y-m-d');
-                        $user = 
+                        $user = $_SESSION['user'];
                         $tipoUser = $user['TipoUser'];
                         $sqlAlert = "INSERT INTO alertas (texto_alerta, data_emissao, id_remetentes, tipo) 
                          VALUES ('O administrador, com id" . $user['Id_User'] . ", criou um nova rota', '$dataAtual', " . $user['Id_User'] . ", 'Criar rota')";

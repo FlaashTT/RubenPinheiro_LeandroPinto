@@ -122,9 +122,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`Id_User`, `Nome`, `Email`, `Password`, `Autenticacao`, `TipoUser`, `Estado`, `Saldo`) VALUES
 (1, 'Cliente', 'Cliente@gmail.com', '4983a0ab83ed86e0e7213c8783940193', 'Aceite', 1, 'Offline', 66),
 (2, 'Funcionario', 'funcionario@gmail.com', 'cc7a84634199040d54376793842fe035', 'Aceite', 2, 'Offline', 36),
-(3, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Aceite', 3, 'Offline', 10),
-(15, 'Leo', 'leo@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Aceite', 1, 'Offline', 0),
-(16, '&lt;b&gt;Ola&lt;/b&gt;', 'teste@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Aceite', 1, 'Offline', 0);
+(3, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Aceite', 3, 'Offline', 10);
 
 -- --------------------------------------------------------
 

@@ -5,7 +5,7 @@ include("../paginas/validar.php");
 session_start();
 
 validar_acesso([3, 2, 1]);
-
+ob_start();
 ?>
 <!DOCTYPE html>
 <html lang="pt-pt">
@@ -188,6 +188,7 @@ validar_acesso([3, 2, 1]);
                     }
                 }
             }
+            ob_end_flush();
             ?>
         </div>
     </div>

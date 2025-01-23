@@ -67,7 +67,7 @@ validar_acesso([3, 2]);
                             //para criar um alerta
                             $dataAtual = date('Y-m-d');
                             $user = $_SESSION['user'];
-                            $tipoUser = $user['TipoUser'];
+                            $tipoUserOn = $user['TipoUser'];
                             $sqlAlert = "INSERT INTO alertas (texto_alerta, data_emissao, id_remetentes, tipo) ";
 
                             if ($tipoUserOn == 2) {
