@@ -88,7 +88,7 @@ validar_acesso([3, 2, 1]);
                     echo "
                 <h1> Olá " . $user['Nome'] . "</h1>
                 <form method ='POST'>
-                    <p>Saldo " . $user['Saldo'] . "€  <a href='../paginas/acoes.php?gestaoCarteira=" . $user['Email'] . "'>Adicionar saldo</a></p>
+                    <p>Saldo " . $user['Saldo'] . "€  <a href='../paginas/addSaldoCliente.php?gestaoCarteira=" . $user['Email'] . "'>Adicionar saldo</a></p>
                 </form>";
                 }
             }

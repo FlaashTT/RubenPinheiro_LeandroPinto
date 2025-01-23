@@ -102,6 +102,18 @@ if ($user['TipoUser'] == 1) {
     ';
 }
 
+if (
+    !isset($_POST['editarConta']) &&
+    !isset($_POST['alterarDados']) && 
+    !isset($_POST['alterarTipoConta'])&& 
+    !isset($_POST['EliminarConta']) &&
+    !isset($_POST['gestaoCarteira']) && 
+    !isset($_POST['adicionarSaldo']) && 
+    !isset($_POST['levantarSaldo'])
+) {
+    header("Refresh: 0.1; url=../paginas/inicio.php");
+}
+
 
 if (isset($_POST['editarConta'])) {
     $user_email = $_POST['editarConta'];
