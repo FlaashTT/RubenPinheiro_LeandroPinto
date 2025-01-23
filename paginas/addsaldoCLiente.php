@@ -81,14 +81,7 @@
 </html>
 
 <?php
-/*
-if (empty($_POST['gestaoCarteira']) && 
-    empty($_POST['adicionarSaldo']) && 
-    empty($_POST['levantarSaldo'])) 
-{
-    header("Location: ../paginas/inicio.php");
-    exit(); 
-}*/
+
 
 
 session_start();
@@ -96,6 +89,8 @@ include("../basedados/basedados.h");
 require("../paginas/validar.php");
 
 validar_acesso([3, 2, 1]);
+
+
 
 $user = $_SESSION['user'];
 if ($user['TipoUser'] == 1) {
@@ -111,6 +106,8 @@ if ($user['TipoUser'] == 1) {
     </div>
     ';
 }
+
+
 
 
 if (isset($_GET['gestaoCarteira']) || isset($_POST['adicionarSaldo']) || isset($_POST['levantarSaldo'])) {
