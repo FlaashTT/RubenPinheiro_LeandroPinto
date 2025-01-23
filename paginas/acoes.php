@@ -85,7 +85,7 @@ session_start();
 include("../basedados/basedados.h");
 require("../paginas/validar.php");
 
-validar_acesso([3, 2]);
+validar_acesso([3, 2, 1]);
 
 $user = $_SESSION['user'];
 if ($user['TipoUser'] == 1) {
