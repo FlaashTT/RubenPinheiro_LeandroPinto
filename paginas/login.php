@@ -127,6 +127,10 @@ if (!empty($_POST["email"]) && !empty($_POST['password'])) {
     }else if($user['Autenticacao'] === 'Rejeitado'){
       echo "A sua conta foi negada.";
       header(" url=login.php");
+
+    }else if($user['Autenticacao'] === 'Eliminado'){
+      echo "Conta inexistente.";
+      header(" url=login.php");
     }
   } else {
     echo "Email ou senha inválidos.";

@@ -102,8 +102,8 @@ if (isset($_POST['reset']) && $_POST['reset'] == 'true') {
                         echo "<td>" . $user['TipoUser'] . "</td>";
                         echo "<td>" . $user['Saldo'] . "€" . "</td>";
                         echo "<td><a href='../paginas/acoes.php?gestaoCarteira=" . $user['Email'] . "'>Adicionar saldo</a></td>";
-                        $user = $_SESSION['user'];
-                        $tipoUserOn = $user['TipoUser'];
+                        $userON = $_SESSION['user'];
+                        $tipoUserOn = $userON['TipoUser'];
                         if ((int)$tipoUserOn == 2 ) {
                             echo "<td>Não tem permissão</td>";  
                             echo "<td>Não tem permissão</td>";

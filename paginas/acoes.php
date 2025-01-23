@@ -136,7 +136,7 @@ if (isset($_GET['editarConta'])) {
                             Estado de autenticação do utilizador: " . $user['Autenticacao'] . " 
                                 <select id='alterarTipo' name='alterarTipo'>
                                     <option value='' selected disabled>Selecione uma opção</option>
-                                    <option value='Aceitar'>Aceitar utilizador</option>
+                                    <option value='Aceite'>Aceitar utilizador</option>
                                     <option value='Pendente'>Colocar Pendente</option>
                                     <option value='Rejeitar'>Rejeitar utilizador</option>
                                 </select>
@@ -478,11 +478,8 @@ if (isset($_GET['ConfirmarButton'])) {
     // Atualizar o estado do utilizador para "Eliminado"
     $sqlUpdate = "UPDATE users SET Autenticacao = 'Eliminado' WHERE Email = '$user_email'";
 
+       
         if (mysqli_query($conn, $sqlUpdate)) {
-            // Apagar o utilizador da base de dados
-            $sqlDelete = "DELETE FROM users WHERE Email = '$user_email'";
-
-        if (mysqli_query($conn, $sql)) {
             //para criar um alerta
             $dataAtual = date('Y-m-d');
             $user = $_SESSION['user'];
@@ -497,9 +494,7 @@ if (isset($_GET['ConfirmarButton'])) {
         } else {
             echo "Erro ao aceitar o usuário: " . mysqli_error($conn);
         }
-    }else {
-        echo "Erro ao atualizar o estado do utilizador: " . mysqli_error($conn);
-    }
+    
 }
 
 header(" url=inicio.php?page=gerenciar-utilizadores");

@@ -94,7 +94,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
       // Sanitização dos inputs para prevenir XSS
       $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);  // Filtra o e-mail
-      $username = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');  // Sanitiza o nome de utilizador
+      $username = strip_tags($_POST['username']);
+      $username = htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); // prevenção contra htmlInjection
       $password = $_POST['password'];
 
       // Verificação do e-mail válido
@@ -146,8 +147,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo "Por favor, preencha todos os campos!";
     }
-} else {
-    echo "Método de requisição inválido!";
 }
 
 // Fecha a conexão
