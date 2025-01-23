@@ -45,25 +45,21 @@ session_start();
         <div class="card-Inicio">
             <h3>Saúde e Segurança</h3>
             <p>Mantém-te a ti e aos outros em segurança enquanto viajas connosco.</p>
-            <a href="#" class="btn-saber-mais">Saber mais</a>
         </div>
 
         <div class="card-Inicio">
             <h3>Conforto a bordo</h3>
             <p>Os nossos autocarros estão equipados com assentos grandes e confortáveis, WC, Wi-Fi e tomadas.</p>
-            <a href="#" class="btn-saber-mais">O nosso serviço a bordo</a>
         </div>
 
         <div class="card-Inicio">
             <h3>Grande rede de autocarros</h3>
             <p>Escolhe a partir de 3 000 destinos de viagem em 35 países e descobre a Europa com a FlexBus.</p>
-            <a href="#" class="btn-saber-mais">Para a nossa rede</a>
         </div>
 
         <div class="card-Inicio">
             <h3>Viaja de forma ecológica</h3>
             <p>Os nossos autocarros provaram ter uma excelente pegada de carbono por passageiro conduzido/quilómetro.</p>
-            <a href="#" class="btn-saber-mais">Saber mais</a>
         </div>
     </div>
     </div>
