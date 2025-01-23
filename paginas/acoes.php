@@ -103,9 +103,8 @@ if ($user['TipoUser'] == 1) {
 }
 
 
-
-if (isset($_GET['editarConta'])) {
-    $user_email = $_GET['editarConta'];
+if (isset($_POST['editarConta'])) {
+    $user_email = $_POST['editarConta'];
     echo "<h1>Alterar Dados</h1>";
     echo "<p>Email do utilizador: " . $user_email . "</p>";
 
@@ -216,13 +215,13 @@ if (isset($_POST['alterarDados'])) {
 }
 
 
-if (isset($_GET['gestaoCarteira']) || isset($_GET['adicionarSaldo']) || isset($_GET['levantarSaldo'])) {
-    if (isset($_GET['gestaoCarteira'])) {
-        $AdicionarEmail = $_GET['gestaoCarteira'];
-    } elseif (isset($_GET['adicionarSaldo'])) {
-        $AdicionarEmail = $_GET['adicionarSaldo'];
-    } elseif (isset($_GET['levantarSaldo'])) {
-        $AdicionarEmail = $_GET['levantarSaldo'];
+if (isset($_POST['gestaoCarteira']) || isset($_POST['adicionarSaldo']) || isset($_POST['levantarSaldo'])) {
+    if (isset($_POST['gestaoCarteira'])) {
+        $AdicionarEmail = $_POST['gestaoCarteira'];
+    } elseif (isset($_POST['adicionarSaldo'])) {
+        $AdicionarEmail = $_POST['adicionarSaldo'];
+    } elseif (isset($_POST['levantarSaldo'])) {
+        $AdicionarEmail = $_POST['levantarSaldo'];
     }
 
     // Mostra as opções de carteira
@@ -239,8 +238,8 @@ if (isset($_GET['gestaoCarteira']) || isset($_GET['adicionarSaldo']) || isset($_
 }
 
 // Mostra o formulário para adicionar saldo quando clicado
-if (isset($_GET['adicionarSaldo'])) {
-    $AdicionarEmail = $_GET['adicionarSaldo'];
+if (isset($_POST['adicionarSaldo'])) {
+    $AdicionarEmail = $_POST['adicionarSaldo'];
 
     echo "
     <h2>Adicionar Saldo</h2>
@@ -258,7 +257,7 @@ if (isset($_GET['adicionarSaldo'])) {
     ";
 }
 
-if (isset($_GET['confirmarAddSaldo'])) {
+if (isset($_POST['confirmarAddSaldo'])) {
     $user = $_SESSION['user'];
     $AdicionarEmail = $user['Email'];
 
@@ -356,8 +355,8 @@ if (isset($_GET['confirmarAddSaldo'])) {
 
 
 
-if (isset($_GET['levantarSaldo'])) {
-    $AdicionarEmail = $_GET['levantarSaldo'];
+if (isset($_POST['levantarSaldo'])) {
+    $AdicionarEmail = $_POST['levantarSaldo'];
 
     echo "
     <h3>Levantar Dinheiro</h3>
@@ -370,7 +369,7 @@ if (isset($_GET['levantarSaldo'])) {
 }
 
 
-if (isset($_GET['confirmarLevantar'])) {
+if (isset($_POST['confirmarLevantar'])) {
     $user = $_SESSION['user'];
     $AdicionarEmail = $user['Email'];
 
@@ -417,23 +416,23 @@ if (isset($_GET['confirmarLevantar'])) {
     header("Refresh: 3; url=?gestaoCarteira=$AdicionarEmail");
 }
 
-if (isset($_GET['alterarTipoConta'])) {
-    $AlterarEmail = $_GET['alterarTipoConta'];
+if (isset($_POST['alterarTipoConta'])) {
+    $AlterarEmail = $_POST['alterarTipoConta'];
     textoTrocaTipoUser($AlterarEmail);
 }
 
-if (isset($_GET['ConfirmarTrocaTipo'])) {
-    $AlterarEmail = $_GET['ConfirmarTrocaTipo'];
+if (isset($_POST['ConfirmarTrocaTipo'])) {
+    $AlterarEmail = $_POST['ConfirmarTrocaTipo'];
 
     // Verifica se a opção foi selecionada
-    if (!isset($_GET["alterarTipo"]) || empty($_GET["alterarTipo"])) {
+    if (!isset($_POST["alterarTipo"]) || empty($_POST["alterarTipo"])) {
         echo 'Tem de selecionar um tipo!';
         textoTrocaTipoUser($AlterarEmail);
         exit();
     }
 
     
-    $opcoes = $_GET["alterarTipo"];
+    $opcoes = $_POST["alterarTipo"];
 
     //atualizar o tipo de utilizador
     $sql = "UPDATE users SET tipoUser = '$opcoes' WHERE Email = '$AlterarEmail'";
@@ -454,8 +453,8 @@ if (isset($_GET['ConfirmarTrocaTipo'])) {
     }
 }
 
-if (isset($_GET['EliminarConta'])) {
-    $eliminarEmail = $_GET['EliminarConta'];
+if (isset($_POST['EliminarConta'])) {
+    $eliminarEmail = $_POST['EliminarConta'];
     echo '<h1>Eliminar Dados</h1>';
     echo "<p>Utilizador: " . $eliminarEmail . "</p>";
     echo '
@@ -472,8 +471,8 @@ if (isset($_GET['EliminarConta'])) {
     ';
 }
 
-if (isset($_GET['ConfirmarButton'])) {
-    $user_email = $_GET['ConfirmarButton'];
+if (isset($_POST['ConfirmarButton'])) {
+    $user_email = $_POST['ConfirmarButton'];
 
     // Atualizar o estado do utilizador para "Eliminado"
     $sqlUpdate = "UPDATE users SET Autenticacao = 'Eliminado' WHERE Email = '$user_email'";
