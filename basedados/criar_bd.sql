@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04-Jan-2025 às 02:12
--- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.2.12
+-- Generation Time: Jan 23, 2025 at 06:08 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `felixbuslr24`
+-- Database: `felixbuslr24`
 --
 CREATE DATABASE IF NOT EXISTS `felixbuslr24` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `felixbuslr24`;
@@ -26,7 +26,7 @@ USE `felixbuslr24`;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `alertas`
+-- Table structure for table `alertas`
 --
 
 CREATE TABLE IF NOT EXISTS `alertas` (
@@ -37,12 +37,20 @@ CREATE TABLE IF NOT EXISTS `alertas` (
   `tipo` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_alerta`),
   KEY `fk_alertas` (`id_remetentes`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `alertas`
+--
+
+INSERT INTO `alertas` (`id_alerta`, `texto_alerta`, `data_emissao`, `id_remetentes`, `tipo`) VALUES
+(38, 'Criou um novo registo', '2025-01-23', 15, 'Novo registo'),
+(39, 'Criou um novo registo', '2025-01-23', 16, 'Novo registo');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `bilhetes`
+-- Table structure for table `bilhetes`
 --
 
 CREATE TABLE IF NOT EXISTS `bilhetes` (
@@ -62,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `bilhetes` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `bilhetescomprados`
+-- Table structure for table `bilhetescomprados`
 --
 
 CREATE TABLE IF NOT EXISTS `bilhetescomprados` (
@@ -77,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `bilhetescomprados` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `rota`
+-- Table structure for table `rota`
 --
 
 CREATE TABLE IF NOT EXISTS `rota` (
@@ -92,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `rota` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -105,21 +113,23 @@ CREATE TABLE IF NOT EXISTS `users` (
   `Estado` varchar(15) NOT NULL DEFAULT 'Offline',
   `Saldo` double NOT NULL DEFAULT 0,
   PRIMARY KEY (`Id_User`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`Id_User`, `Nome`, `Email`, `Password`, `Autenticacao`, `TipoUser`, `Estado`, `Saldo`) VALUES
 (1, 'Cliente', 'Cliente@gmail.com', '4983a0ab83ed86e0e7213c8783940193', 'Aceite', 1, 'Offline', 66),
 (2, 'Funcionario', 'funcionario@gmail.com', 'cc7a84634199040d54376793842fe035', 'Aceite', 2, 'Offline', 36),
-(3, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Aceite', 3, 'Online', 10);
+(3, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Aceite', 3, 'Offline', 10),
+(15, 'Leo', 'leo@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Aceite', 1, 'Offline', 0),
+(16, '&lt;b&gt;Ola&lt;/b&gt;', 'teste@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Aceite', 1, 'Offline', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `veiculo`
+-- Table structure for table `veiculo`
 --
 
 CREATE TABLE IF NOT EXISTS `veiculo` (
@@ -131,24 +141,18 @@ CREATE TABLE IF NOT EXISTS `veiculo` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Restrições para despejos de tabelas
+-- Constraints for dumped tables
 --
 
 --
--- Limitadores para a tabela `alertas`
---
-ALTER TABLE `alertas`
-  ADD CONSTRAINT `fk_alertas` FOREIGN KEY (`id_remetentes`) REFERENCES `users` (`Id_User`);
-
---
--- Limitadores para a tabela `bilhetes`
+-- Constraints for table `bilhetes`
 --
 ALTER TABLE `bilhetes`
   ADD CONSTRAINT `fk_rota` FOREIGN KEY (`id_rota`) REFERENCES `rota` (`id_rota`),
   ADD CONSTRAINT `fk_veiculo` FOREIGN KEY (`id_veiculo`) REFERENCES `veiculo` (`id_veiculo`);
 
 --
--- Limitadores para a tabela `bilhetescomprados`
+-- Constraints for table `bilhetescomprados`
 --
 ALTER TABLE `bilhetescomprados`
   ADD CONSTRAINT `fk_bilhete` FOREIGN KEY (`id_bilhete`) REFERENCES `bilhetes` (`id_bilhete`),
